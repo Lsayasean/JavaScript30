@@ -31,29 +31,74 @@
 
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    let newInv = inventors.filter(e => e.year >= 1500 && e.year < 1600)
+    console.log(newInv)
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors' first and last names
+    let firstLast = inventors.map(val => `${val.first} ${val.last}`)
+    console.log(firstLast)
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    let sorted = inventors.sort((a, b) => a.year-b.year)
+    console.log(sorted)
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live?
+    const total = inventors.reduce((total, inv) => {
+      return total + (inv.passed - inv.year)
+    }, 0)
+
+    console.log(total)
 
     // 5. Sort the inventors by years lived
+    const oldest = inventors.sort((a,b) => {
+      const last = a.passed - a.year;
+      const next = b.passed - b.year;
+      if(last > next ){
+        return -1
+      } else {
+        return 1
+      }
+    })
+
+    console.log(oldest)
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+    
+    // const cat = document.querySelector('.mw-category');
+    // const links = [...cat.querySelectorAll('a')]
 
+    // const de = links
+    //   .map(link => link.textContent)
+    //   .filter(street => street.includes('de'))
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+
+    const alpha = people.sort(function(lastOne, nextOne){
+      const [alast, afirst]= lastOne.split(',')
+      const [blast, bfirst]= nextOne.split(',')
+      return alast > blast ? 1 : -1 
+    })
+
+    console.log(alpha)
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
 
+    const transportation = data.reduce(function(obj, item) {
+      if (!obj[item]) {
+        obj[item] = 0;
+      }
+      obj[item]++;
+      return obj;
+    }, {});
+
+    console.log(transportation);
   </script>
 </body>
 </html>
